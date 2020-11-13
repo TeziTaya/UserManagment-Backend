@@ -55,7 +55,8 @@ namespace UserManagement
                     OnTokenValidated = context  =>
                     {
                         var userService = context.HttpContext.RequestServices.GetRequiredService<IManageUser>();
-                        var userId = int.Parse(context.Principal.Identity.Name);
+                        string Id = context.Principal.FindFirst("id").Value;
+                        var userId = int.Parse(Id);
                         var user =  userService.GetUserById(userId);
                         if (user == null)
                         {
